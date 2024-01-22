@@ -1,7 +1,31 @@
 const inputName = document.querySelector("#name");
 const inputMail = document.querySelector("#email");
 const submitBtn = document.querySelector("button");
+const resMessage = document.querySelector("p");
 
+const displayMessage = (message) => {
+  resMessage.textContent = message;
+  setTimeout(() => {
+    resMessage.textContent = "";
+  }, 5000);
+};
+
+const restoreInputs = () => {
+  inputName.value = "";
+  inputMail.value = "";
+};
+
+const makeTextRed = () => {
+  resMessage.classList.remove("green");
+  resMessage.classList.add("red");
+};
+
+const makeTextGreen = () => {
+  resMessage.classList.remove("red");
+  resMessage.classList.add("green");
+};
+
+// fetch function
 const postSubscriber = async (e) => {
   e.preventDefault();
 
@@ -19,13 +43,20 @@ const postSubscriber = async (e) => {
       body: JSON.stringify(subscriber),
     });
 
-    inputName.value = "";
-    inputMail.value = "";
+    restoreInputs();
 
     let result = await response.json();
-    alert(result.message);
+
+    if (result.success) {
+      makeTextGreen();
+    } else {
+      makeTextRed();
+    }
+
+    displayMessage(result.message);
   } catch (err) {
-    alert(err.message);
+    makeTextRed();
+    displayMessage(err);
   }
 };
 

@@ -11,7 +11,7 @@ const createSubscriber = async (req, res) => {
   if (!name || !email) {
     return res
       .status(400)
-      .json({ success: false, message: "All fields are required." });
+      .json({ success: false, message: "All fields are required" });
   }
 
   // email validation example (basic testing)
@@ -29,7 +29,7 @@ const createSubscriber = async (req, res) => {
   if (emailAlreadyExists) {
     return res.status(409).json({
       success: false,
-      message: `The email <${obscuredEmail}> is already associated with the subscription plan. Choose another one or check for errors.`,
+      message: `The email <${obscuredEmail}> is already associated with the subscription plan. Choose another one or check for errors`,
     });
   }
 
@@ -37,7 +37,7 @@ const createSubscriber = async (req, res) => {
   if (!actualSubscriber) {
     return res.status(400).json({
       success: false,
-      message: "There was an error. Try agaian",
+      message: "There was an error. Try again",
     });
   }
 

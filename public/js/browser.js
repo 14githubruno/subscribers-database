@@ -3,6 +3,8 @@ const inputMail = document.querySelector("#email");
 const submitBtn = document.querySelector("button");
 const resMessage = document.querySelector("p");
 
+const catchErrMessage = "Something went wrong. Try again later";
+
 const displayMessage = (message) => {
   resMessage.textContent = message;
   setTimeout(() => {
@@ -56,7 +58,9 @@ const postSubscriber = async (e) => {
     displayMessage(result.message);
   } catch (err) {
     makeTextRed();
-    displayMessage(err);
+    displayMessage(catchErrMessage);
+    // for testing purposes
+    console.log(err);
   }
 };
 
